@@ -1,5 +1,6 @@
 import vk
 import random
+import datetime
 
 session = vk.Session()
 api = vk.API(session, v=5.0)
@@ -27,6 +28,12 @@ def get_random_quote(group_id):
             cur = str(attach['type']) + str(group_id) + '_' + str(media_id)
             attachment.append(cur)
     return message, ','.join(attachment)
+
+
+def ban_censorship(user, group):
+    date_ban = int(datetime.datetime.now().timestamp()) + 24 * 60 * 60
+    api.groups.ban(group_id=group, owner_id=user, end_date=date_ban, reason=3, comment='За мат и двор стреляю в упор!',
+                   comment_visible=1)
 
 
 def send_message(user_id, token, message, attachment=""):
