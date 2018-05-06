@@ -2,7 +2,7 @@ import command_system
 
 
 def bye():
-   message = 'Пока!\nИ да прибудет с тобой СерСан!.'
+   message = 'Пока! И да прибудет с тобой СерСан!'
    return message, ''
 
 bye_command = command_system.Command()
