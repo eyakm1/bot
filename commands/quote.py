@@ -5,6 +5,7 @@ import settings
 
 def quote():
     msg, attach = vkapi.get_random_quote(-159191596, settings.service_token)
+    return msg, attach
 
 
 quote_command = command_system.Command()

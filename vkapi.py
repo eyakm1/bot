@@ -19,16 +19,20 @@ def get_random_quote(group_id, token):
     max_num = resp['count']
     num = random.randint(1, max_num)
     quote = api.wall.get(owner_id=group_id, count=1, offset=num, access_token=token)['items'][0]
-    quote_attach = quote['attachments']
+    quote_attach = quote['attachments'] if 'attachments' in quote else []
     message = quote['text']
     attachment = []
-    if '#цитата_Доричи' in message:
+    if '#цитата_Доричи' in message or '#фотка_Доричи' in message:
         for attach in quote_attach:
             if attach['type'] in {'photo', 'video', 'audio', 'doc', 'wall', 'market'}:
                 media_id = attach[attach['type']]['id']
                 cur = str(attach['type']) + str(group_id) + '_' + str(media_id)
                 attachment.append(cur)
-        return message, ','.join(attachment)
+        final_attach = ','.join(attachment)
+        if final_attach:
+            return message, final_attach
+        else:
+            return message, ''
 
 
 def ban_censorship(user, group, token):

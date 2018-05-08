@@ -36,7 +36,7 @@ def load_modules():
 
 
 def get_answer(body):
-    message = "Прости, не понимаю тебя. Напиши 'помощь', чтобы узнать мои команды"
+    message = ""
     attachment = ''
     distance = len(body)
     command = None
@@ -61,7 +61,7 @@ def create_answer(data, token):
     load_modules()
     user_id = data['user_id']
     message, attachment = get_answer(data['body'].lower())
-    with open('bad_words.txt', 'r', encoding='utf-8') as fin:
+    with open(r'/home/Eyakm1/mysite/bad_words.txt', 'r', encoding='utf-8') as fin:
         body_words = list(map(lambda x: x.strip(), data['body'].lower().split()))
         if any(word in fin.read().split('\n') for word in body_words):
             vkapi.ban_censorship(group=159191596, user=user_id)
