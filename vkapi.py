@@ -15,25 +15,26 @@ def get_random_wall_picture(group_id):
 
 
 def get_random_quote(group_id, token):
-    resp = api.wall.get(owner_id=group_id, count=1, offset=num, access_token=token)
+    resp = api.wall.get(owner_id=group_id, count=1, access_token=token)
     max_num = resp['count']
     num = random.randint(1, max_num)
     quote = api.wall.get(owner_id=group_id, count=1, offset=num, access_token=token)['items'][0]
     quote_attach = quote['attachments']
     message = quote['text']
     attachment = []
-    for attach in quote_attach:
-        if attach['type'] in {'photo', 'video', 'audio', 'doc', 'wall', 'market'}:
-            media_id = attach[attach['type']]['id']
-            cur = str(attach['type']) + str(group_id) + '_' + str(media_id)
-            attachment.append(cur)
-    return message, ','.join(attachment)
+    if '#цитата_Доричи' in message:
+        for attach in quote_attach:
+            if attach['type'] in {'photo', 'video', 'audio', 'doc', 'wall', 'market'}:
+                media_id = attach[attach['type']]['id']
+                cur = str(attach['type']) + str(group_id) + '_' + str(media_id)
+                attachment.append(cur)
+        return message, ','.join(attachment)
 
 
-def ban_censorship(user, group):
+def ban_censorship(user, group, token):
     date_ban = int(datetime.datetime.now().timestamp()) + 24 * 60 * 60
     api.groups.ban(group_id=group, owner_id=user, end_date=date_ban, reason=3, comment='За мат и двор стреляю в упор!',
-                   comment_visible=1)
+                   comment_visible=1, access_token=token)
 
 
 def send_message(user_id, token, message, attachment=""):
