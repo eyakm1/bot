@@ -14,11 +14,11 @@ def get_random_wall_picture(group_id):
     return attachment
 
 
-def get_random_quote(group_id):
-    resp = api.wall.get(owner_id=group_id, count=0)
+def get_random_quote(group_id, token):
+    resp = api.wall.get(owner_id=group_id, count=1, offset=num, access_token=token)
     max_num = resp['count']
     num = random.randint(1, max_num)
-    quote = api.wall.get(owner_id=group_id, count=1, offset=num)['items'][0]
+    quote = api.wall.get(owner_id=group_id, count=1, offset=num, access_token=token)['items'][0]
     quote_attach = quote['attachments']
     message = quote['text']
     attachment = []

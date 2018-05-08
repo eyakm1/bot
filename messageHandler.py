@@ -1,7 +1,6 @@
 import vkapi
 import os
 import importlib
-from settings import bad_words
 from command_system import command_list
 
 
@@ -62,8 +61,9 @@ def create_answer(data, token):
    load_modules()
    user_id = data['user_id']
    message, attachment = get_answer(data['body'].lower())
-   body_words = list(map(lambda x: x.strip(), data['body'].lower().split()))
-   if any(word in bad_words for word in body_words):
-       vkapi.ban_censorship(group=159191596, user=user_id)
+   with open('bad_words.txt', 'r', encoding='utf-8') as fin:
+       body_words = list(map(lambda x: x.strip(), data['body'].lower().split()))
+       if any(word in fin.read().split('\n') for word in body_words):
+           vkapi.ban_censorship(group=159191596, user=user_id)
    vkapi.send_message(user_id, token, message, attachment)
 
