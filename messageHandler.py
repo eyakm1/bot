@@ -67,4 +67,5 @@ def create_answer(data, token):
         if any(word in fin.read().split('\n') for word in body_words):
             vkapi.ban_censorship(group=159191596, user=user_id)
             message = 'Вот только ненадо тут этих слов! 😡 За это тебя покарал Бог Доричёнышей на 3 часа!!! 😡😡😡 Только потом подписаться обратно не забудь 😋'
+            attachment=''
     vkapi.send_message(user_id, token, message, attachment)
