@@ -1,9 +1,12 @@
 import vk
 import random
 import datetime
+import settings
 
-session = vk.Session()
-api = vk.API(session, v=5.0)
+session = vk.AuthSession()
+api = vk.API(session, v=5.74)
+ban_session = vk.AuthSession(settings.app_id, settings.login, settings.passw, scope='manage')
+ban_api = vk.API(ban_session, v=5.74)
 
 
 def get_random_wall_picture(group_id):
@@ -32,10 +35,10 @@ def get_random_quote(group_id, token):
         return message, final_attach
 
 
-def ban_censorship(user, group, token):
+def ban_censorship(user, group):
     date_ban = int(datetime.datetime.now().timestamp()) + 24 * 60 * 60
-    api.groups.ban(group_id=group, owner_id=user, end_date=date_ban, reason=3, comment='За мат и двор стреляю в упор!',
-                   comment_visible=1, access_token=token)
+    ban_api.groups.ban(group_id=group, owner_id=user, end_date=date_ban, reason=3, comment='За мат и двор стреляю в упор!',
+                   comment_visible=1)
 
 
 def send_message(user_id, token, message, attachment=""):
