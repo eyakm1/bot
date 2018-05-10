@@ -25,7 +25,7 @@ def get_random_quote(group_id, token):
     quote_attach = quote['attachments'] if 'attachments' in quote else []
     message = quote['text']
     attachment = []
-    if '#цитата_Доричи' in message or '#фотка_Доричи' in message:
+    if '#цитата_Доричи' in message:
         for attach in quote_attach:
             if attach['type'] in {'photo', 'video', 'audio', 'doc', 'wall', 'market'}:
                 media_id = attach[attach['type']]['id']
@@ -36,7 +36,7 @@ def get_random_quote(group_id, token):
 
 
 def ban_censorship(user, group):
-    date_ban = int(datetime.datetime.now().timestamp()) + 24 * 60 * 60
+    date_ban = int(datetime.datetime.now().timestamp()) + 3 * 60 * 60
     ban_api.groups.ban(group_id=group, owner_id=user, end_date=date_ban, reason=3, comment='За мат и двор стреляю в упор!',
                    comment_visible=1)
 
