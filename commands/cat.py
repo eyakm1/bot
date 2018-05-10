@@ -14,3 +14,4 @@ cat_command = command_system.Command()
 cat_command.keys = ['котик', 'кошка', 'кот', 'котенок', 'котяра', 'cat']
 cat_command.description = 'Пришлю картинку с котиком'
 cat_command.process = cat
+cat_command.priority_number = 3

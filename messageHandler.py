@@ -54,14 +54,15 @@ def get_answer(body):
     if distance < len(body) * 0.4:
         message, attachment = command.process()
         message = 'Я понял ваш запрос как "%s"\n\n' % key + message
-    return message, attachment
+    if message:
+        return message, attachment
 
 
 def create_answer(data, token):
     load_modules()
     user_id = data['user_id']
     message, attachment = get_answer(data['body'].lower())
-    with open(r'/home/Eyakm1/mysite/bad_words.txt', 'r', encoding='utf-8') as fin:
+    with open(r'mysite/bad_words.txt', 'r', encoding='utf-8') as fin:
         body_words = list(map(lambda x: x.strip(), data['body'].lower().split()))
         if any(word in fin.read().split('\n') for word in body_words):
             vkapi.ban_censorship(group=159191596, user=user_id)

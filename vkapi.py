@@ -29,10 +29,7 @@ def get_random_quote(group_id, token):
                 cur = str(attach['type']) + str(group_id) + '_' + str(media_id)
                 attachment.append(cur)
         final_attach = ','.join(attachment)
-        if final_attach:
-            return message, final_attach
-        else:
-            return message, ''
+        return message, final_attach
 
 
 def ban_censorship(user, group, token):
