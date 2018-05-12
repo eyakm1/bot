@@ -2,6 +2,7 @@
 
 from flask import Flask, request, json
 from settings import *
+import sys
 import messageHandler
 
 app = Flask(__name__)
@@ -15,6 +16,7 @@ def hello_world():
 @app.route('/', methods=['POST'])
 def processing():
     data = json.loads(request.data)
+    print(data, file=sys.stderr)
     if 'type' not in data.keys():
         return 'not vk'
     if data['type'] == 'confirmation':
