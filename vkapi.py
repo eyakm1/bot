@@ -5,7 +5,7 @@ import settings
 
 session = vk.AuthSession()
 api = vk.API(session, v=5.74)
-ban_session = vk.AuthSession(settings.app_id, settings.login, settings.passw, scope='manage')
+ban_session = vk.AuthSession(settings.app_id, settings.login, settings.passw, scope='groups, manage')
 ban_api = vk.API(ban_session, v=5.74)
 
 
