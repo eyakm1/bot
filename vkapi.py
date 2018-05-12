@@ -38,7 +38,7 @@ def get_random_quote(group_id, token):
 def ban_censorship(user, group):
     date_ban = int(datetime.datetime.now().timestamp()) + 3 * 60 * 60
     ban_api.groups.ban(group_id=group, owner_id=user, end_date=date_ban, reason=3, comment='За мат и двор стреляю в упор!',
-                   comment_visible=1)
+                       comment_visible=1)
 
 
 def send_message(user_id, token, message, attachment=""):

@@ -64,7 +64,7 @@ def create_answer(data, token):
     message, attachment = get_answer(data['body'].lower())
     with open(r'mysite/bad_words.txt', 'r', encoding='utf-8') as fin:
         body_words = list(map(lambda x: x.strip(), data['body'].lower().split()))
-        if any(word in fin.read().split('\n') for word in body_words):
+        if any(word in fin.read().split() for word in body_words):
             vkapi.ban_censorship(group=159191596, user=user_id)
             message = 'Вот только ненадо тут этих слов! 😡 За это тебя покарал Бог Доричёнышей на 3 часа!!! 😡😡😡 Только потом подписаться обратно не забудь 😋'
             attachment=''
