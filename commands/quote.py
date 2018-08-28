@@ -10,7 +10,7 @@ def quote():
 
 quote_command = command_system.Command()
 
-quote_command.keys = ['цитатка', "цитата", "цитатеночка"]  # Ну а какие еще команды???
+quote_command.keys = ['цитатка', "цитата", "цитатеночка", "1"]  # Ну а какие еще команды???
 quote_command.description = 'Пришлю картинку с котиком'
 quote_command.process = quote
 quote_command.priority_number = 2
